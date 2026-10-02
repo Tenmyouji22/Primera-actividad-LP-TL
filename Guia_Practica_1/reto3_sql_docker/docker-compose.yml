@@ -1,0 +1,13 @@
+services:
+  db:
+    image: postgres:16
+    container_name: escuela_db
+    environment:
+      POSTGRES_DB: escuela
+      POSTGRES_USER: escuela_user
+      POSTGRES_PASSWORD: escuela_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      # Ejecuta schema.sql automáticamente la primera vez que se crea la base
+      - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql:ro
